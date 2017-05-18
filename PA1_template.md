@@ -5,9 +5,7 @@ output:
     keep_md: true
 ---
 
-```{r include=FALSE}
-opts_chunk$set(dev = "svg")
-```
+
 
 # Reproducible Research: Peer Assessment 1
 
@@ -15,7 +13,8 @@ This is my solution to the assignment!
 
 ## Loading and preprocessing the data
 
-```{r}
+
+```r
 # Read the data.
 data <- read.csv("activity.csv")
 # It contains consecutive rows (possibly missing values) for every day
@@ -56,7 +55,8 @@ places -- they're up here to avoid repetition.
 
 ## What is the mean total number of steps taken per day?
 
-```{r}
+
+```r
 # Columns == days
 original <- colSums(steps)
 hist(original, main = "Histogram of total steps taken per day",
@@ -69,12 +69,15 @@ legend("topright", c(paste("Mean:", format(mean_), "steps"),
        col = col, lty = lty, lwd = 2, bty = "n")
 ```
 
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.svg)
+
 Here is a summary of the total number of steps taken per day -- missing
 values ignored. The histogram is annotated with the mean and the median.
 
 ## What is the average daily activity pattern?
 
-```{r}
+
+```r
 # Rows == intervals
 mean_ <- rowMeans(steps, na.rm = TRUE)
 plot(data$interval[1:nrow(steps)], mean_, type = "l",
@@ -87,6 +90,8 @@ text(x, y, paste("Maximum:", format(y), "steps at", format(x, "%H:%M")),
      pos = 4)
 ```
 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.svg)
+
 And this plot shows when in the day (on average) the activity took
 place. It's annotated with the 5 minute interval in which the most steps
 were taken.
@@ -98,7 +103,8 @@ system.
 
 ## Imputing missing values
 
-```{r}
+
+```r
 # How many values are missing?
 missing_values <- sum(is.na(steps))
 missing_days <- sum(apply(is.na(steps), 2, any))
@@ -118,7 +124,9 @@ legend("topright", c(paste("Mean:", format(mean_), "steps"),
        col = col, lty = lty, lwd = 2, bty = "n")
 ```
 
-There are `r missing_values` missing values (`r missing_days` missing
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.svg)
+
+There are 2304 missing values (8 missing
 days). To fill them in, I first thought, interpolate between the
 intervals before and after the missing values! In other words, assume
 that activity levels are similar to nearby levels. But then I noticed
@@ -137,12 +145,15 @@ day by much. (The new mean and median are reported in the histogram
 above.) Both decreased by less than 1% -- the mean was affected slightly
 more than the median.
 
-```{r}
+
+```r
 # Compare the imputed data with the original.
 boxplot(original, imputed, names = c("Original data", "Imputed data"),
         main = "Original vs. imputed data comparison",
         ylab = "Total steps taken per day")
 ```
+
+![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.svg)
 
 Overall the shape of the imputed data shifted very slightly to the left
 of the original data, in terms of total steps taken per day, as shown in
@@ -158,7 +169,8 @@ intervals is the fanciest strategy that still makes sense?
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-```{r}
+
+```r
 library(ggplot2)
 data$steps <- as.vector(steps)
 ggplot(data, aes(interval, steps)) +
@@ -171,9 +183,12 @@ ggplot(data, aes(interval, steps)) +
                ncol = 1)
 ```
 
+![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.svg)
+
 This is a comparison of weekend activity to activity during the week.
 
-```{r}
+
+```r
 # Quantify some observations.
 sum_ <- with(data, aggregate(
     steps,
@@ -188,10 +203,10 @@ sum_ <- with(sum_, aggregate(
 ```
 
 On weekends there appears to be less activity before noon
-(`r format(subset(sum_, weekend & before_noon)$x)` steps on average
-compared to `r format(subset(sum_, !weekend & before_noon)$x)` on
+(3904.365 steps on average
+compared to 5196.404 on
 weekdays) -- maybe because the person measured doesn't go to work or
 school on the weekend? Conversely there appears to be more activity
-after noon (`r format(subset(sum_, weekend & !before_noon)$x)` steps on
-average compared to `r format(subset(sum_, !weekend & !before_noon)$x)`
+after noon (8200.344 steps on
+average compared to 4560.178
 on weekdays) -- maybe because they work in an office during the week?
