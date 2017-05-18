@@ -69,7 +69,7 @@ legend("topright", c(paste("Mean:", format(mean_), "steps"),
        col = col, lty = lty, lwd = 2, bty = "n")
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.svg)
+![plot of chunk unnamed-chunk-3](https://cdn.rawgit.com/jablko/RepData_PeerAssessment1/master/figure/unnamed-chunk-3-1.svg)
 
 Here is a summary of the total number of steps taken per day -- missing
 values ignored. The histogram is annotated with the mean and the median.
@@ -90,7 +90,7 @@ text(x, y, paste("Maximum:", format(y), "steps at", format(x, "%H:%M")),
      pos = 4)
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.svg)
+![plot of chunk unnamed-chunk-4](https://cdn.rawgit.com/jablko/RepData_PeerAssessment1/master/figure/unnamed-chunk-4-1.svg)
 
 And this plot shows when in the day (on average) the activity took
 place. It's annotated with the 5 minute interval in which the most steps
@@ -124,7 +124,7 @@ legend("topright", c(paste("Mean:", format(mean_), "steps"),
        col = col, lty = lty, lwd = 2, bty = "n")
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.svg)
+![plot of chunk unnamed-chunk-5](https://cdn.rawgit.com/jablko/RepData_PeerAssessment1/master/figure/unnamed-chunk-5-1.svg)
 
 There are 2304 missing values (8 missing
 days). To fill them in, I first thought, interpolate between the
@@ -153,7 +153,7 @@ boxplot(original, imputed, names = c("Original data", "Imputed data"),
         ylab = "Total steps taken per day")
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.svg)
+![plot of chunk unnamed-chunk-6](https://cdn.rawgit.com/jablko/RepData_PeerAssessment1/master/figure/unnamed-chunk-6-1.svg)
 
 Overall the shape of the imputed data shifted very slightly to the left
 of the original data, in terms of total steps taken per day, as shown in
@@ -183,7 +183,7 @@ ggplot(data, aes(interval, steps)) +
                ncol = 1)
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.svg)
+![plot of chunk unnamed-chunk-7](https://cdn.rawgit.com/jablko/RepData_PeerAssessment1/master/figure/unnamed-chunk-7-1.svg)
 
 This is a comparison of weekend activity to activity during the week.
 

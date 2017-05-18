@@ -7,6 +7,7 @@ output:
 
 ```{r include=FALSE}
 opts_chunk$set(dev = "svg")
+opts_knit$set(base.url = "https://cdn.rawgit.com/jablko/RepData_PeerAssessment1/master/")
 ```
 
 # Reproducible Research: Peer Assessment 1
